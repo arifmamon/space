@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import ArticleList from './components/ArticleList'
 
-function App() {
+export default function Home({articles}) {
+  console.log(articles)
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <div>  
 
-export default App;
+
+
+    <ArticleList articles={articles} />      
+
+
+
+    </div>
+  )
+}
+export const getStaticProps = async () => {
+  const res = await fetch(`https://my-json-server.typicode.com/arifmamon/json/posts`)
+  const articles = await res.json()
+  return {
+    props: {
+      articles
+    }
+  }
+}
